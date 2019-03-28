@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang=”en”>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Name of your awesome camera app -->
+<title>Home page</title> 
+<!-- Link to your main style sheet-->
+<link rel="stylesheet" href="style.css"> 
+<style>
+      body,html {height:100%}
+      #map {width:100%;height:100%;}
+    </style>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script>
+     
+      function initGeolocation() {
+        if (navigator && navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+          console.log('Geolocation is not supported');
+        }
+      }
+     
+      function errorCallback() {}
+
+      function successCallback(position) {
+        var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        var map_options = {
+          zoom: 15,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+       map_container = document.getElementById('map');
+       var map = new google.maps.Map(map_container, map_options);
+      }      
+      </script>
+</head>
+<body onload="javascript:initGeolocation()">
+    <div id="map">
+    </div>>
+<!-- Camera -->
+<main id="camera">
+	<!-- Camera view -->
+    <video id="camera--view" autoplay playsinline></video>
+	 <!-- Camera sensor -->
+    <canvas id="camera--sensor"></canvas>
+    <!-- Camera output -->
+    <img src="//:0" alt="" id="camera--output">
+    <!-- Camera trigger -->
+    <button id="camera--trigger">Take a picture</button>
+</main>
+</body>
+<!-- Reference to your JavaScript file -->
+<script src="app.js"></script>
+</html>
